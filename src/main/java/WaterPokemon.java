@@ -1,3 +1,5 @@
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 /**
  * Our specialty WaterPokemon that inherits from our Pokemon class.
  */
@@ -24,6 +26,7 @@ public class WaterPokemon extends Pokemon {
      *
      */
     public WaterPokemon() {
+        super();
         pokeType = PokemonType.WATER;
         specialtyAttack = "HYDRO CANNON";
         specialtyProbability = specProb;
@@ -61,6 +64,12 @@ public class WaterPokemon extends Pokemon {
      * Implement this.
      */
     public boolean attack(final Pokemon opponent) {
+        if (!super.attack(opponent) && opponent.pokeType != PokemonType.WATER
+                && specProb > Math.random()) {
+            System.out.println("Hydro Canon!");
+            opponent.setHitPoints(0);
+            return true;
+        }
         return false;
     }
 
